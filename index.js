@@ -1,0 +1,12 @@
+import{S as p,a as y,i as s}from"./assets/vendor-DEZpR2tN.js";(function(){const r=document.createElement("link").relList;if(r&&r.supports&&r.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))o(e);new MutationObserver(e=>{for(const t of e)if(t.type==="childList")for(const i of t.addedNodes)i.tagName==="LINK"&&i.rel==="modulepreload"&&o(i)}).observe(document,{childList:!0,subtree:!0});function n(e){const t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?t.credentials="include":e.crossOrigin==="anonymous"?t.credentials="omit":t.credentials="same-origin",t}function o(e){if(e.ep)return;e.ep=!0;const t=n(e);fetch(e.href,t)}})();const u=document.querySelector(".gallery"),d=document.querySelector(".loader");function h(a){const r=a.map(({webformatURL:n,largeImageURL:o,tags:e,likes:t,views:i,comments:f,downloads:m})=>`<li class="gallery-item"><a href="${o}">
+            <img class="gallery-image" src="${n}" alt="${e}" />
+            <div class='item-footer'>
+            <p><b>likes</b> ${t}</p>
+            <p><b>views</b> ${i}</p>
+            <p><b>comments</b> ${f}</p>
+            <p><b>downloads</b> ${m}</p>
+            </div>
+        </a>
+       
+        </li>`).join("");u.innerHTML=r,P.refresh()}function g(){u.innerHTML=""}function b(){d.classList.remove("hidden-loader")}function L(){d.classList.add("hidden-loader")}const P=new p(".gallery a",{}),$="49764635-55321af1e157f58385cb56e9b",A="https://pixabay.com/api/",c={image_type:"photo",orientation:"horizontal",safesearch:!0};function v(a){return y.get(`${A}?key=${$}&q=${a}&image_type=${c.image_type}&orientation=${c.orientation}&safesearch=${c.safesearch}`).then(r=>r.data).catch(r=>{console.error("Error fetching data from Pixabay:",r)})}const l=document.querySelector(".form");l.addEventListener("submit",a=>{a.preventDefault();const r=l.elements["search-text"].value;if(g(),r===""){s.error({message:"Please enter a search query!",position:"topCenter",timeout:3e3});return}b(),v(r).then(o=>{if(o.hits.length===0){s.error({message:"Sorry, there are no images matching your search query. Please try again!",position:"topCenter",timeout:3e3});return}h(o.hits)}).catch(()=>{s.error({message:"Error fetching data from Pixabay",position:"topCenter",timeout:3e3})}).finally(()=>{L()}),l.reset()});
+//# sourceMappingURL=index.js.map
